@@ -1,0 +1,88 @@
+diff --git a/run.rb b/run.rb
+index 66baad9..8391b2f 100644
+--- a/run.rb
++++ b/run.rb
+@@ -1,82 +1,82 @@
+ 
+ # coding:utf-8
+ require 'mechanize'
+ require 'date'
+ 
+ username = 't13208to'
+-password = ''
++password = '5926nzoqkd'
+ date = Date.today
+ 
+ # 授業名
+ # classname = 'Diet for Health'
+ classname = 'Diet for Athlete'
+ 
+ # 木曜日まで日付を進める
+ date += 1 until date.wday == 4
+ # Dateオブジェクトをstrに
+ date = date.strftime('%Y%m%d')
+ date.delete!('-')
+ 
+ url = "pc.php?page=reserve&mode=select&d=#{date}&semesterHidden=20155&lang=en
+ "
+ agent = Mechanize.new
+ agent.verify_mode = OpenSSL::SSL::VERIFY_NONE
+ 
+ agent.get('https://wellness.sfc.keio.ac.jp/v3/') do |page|
+   page.encoding = 'utf-8'
+   page = page.form_with(action: 'pc.php') do |form|
+     form.field_with(name: 'login').value = username
+     form.field_with(name: 'lang').value = 'en'
+     form.field_with(name: 'password').value = password
+   end.click_button
+ 
+   page.body.force_encoding('utf-8').encode
+   if page.body.include?('Login name or password is incorrect.')
+     puts 'error: failed to login'
+   elsif page.body.include?('Login success!')
+     puts 'Login success!'
+   end
+ 
+   page = page.link_with(text: ' Make Reservation').click
+   # page = page.link_with(text: '[Reserve]').click
+   # page = page.link_with(href: url).click
+ 
+   hrefs = page.search('//a[contains( ./text() , "[Reserve]" )]/@href')
+   links = []
+   hrefs.each do |href|
+     links.push(page.link_with(href: href.text))
+   end
+   links.each do |link|
+     page = link.click
+ 
+     result = page.search("//td[contains( ./text() , '#{classname}' )]/following-sibling::td[5] ").text
+     result = 'none' if result == ''
+     unless result == '0' || result == 'none'
+       puts 'Find the class!'
+ 
+       # get lecture number
+       lectureHref =  page.search("//td[contains( ./text() , '#{classname}' )]/following-sibling::td[2]/a/@href")[0]
+       lectureHrefStr = lectureHref.to_s
+       puts lectureHrefStr
+       lectureNumber = lectureHrefStr[/lecture=(.*)&semesterHidden/, 1]
+       puts "#{classname}:#{lectureNumber}"
+ 
+       # Reservation
+       form = page.forms[1]
+       form.radiobutton_with(value: lectureNumber).check
+       page = form.submit
+ 
+       if page.body.include?('You cannot reserve classes for soft course students only.')
+         puts 'You cannot reserve classes for soft course students only.'
+       elsif page.body.include?('Please check the syllabus and reserve the class.')
+         form = page.forms[1]
+         page = form.submit
+         if page.body.include?('is reserved.')
+           puts 'Reservation Successes!'
+         else
+           puts 'Error: Reservation faild.'
+         end
+       end
+     end
+   end
+ end

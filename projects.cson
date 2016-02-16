@@ -1,0 +1,50 @@
+scpro:
+  title: "scpro"
+  paths: [
+    "/Users/TAKAMASA/web/scpro"
+  ]
+peclassautoreserveation:
+  title: "PEClassAutoReserveation"
+  paths: [
+    "/Users/TAKAMASA/web/PEClassAutoReserveation"
+  ]
+amida:
+  title: "amida"
+  paths: [
+    "/Users/TAKAMASA/web/amida"
+  ]
+acaspiex:
+  title: "acaspiex"
+  paths: [
+    "/Library/WebServer/Documents/acaspiex"
+  ]
+railbook:
+  title: "railbook"
+  paths: [
+    "/Users/TAKAMASA/web/railbook"
+  ]
+"db概論":
+  title: "db概論"
+  paths: [
+    "/Users/TAKAMASA/Documents/3年秋/DB/web"
+  ]
+bottle:
+  title: "bottle"
+  paths: [
+    "/Users/TAKAMASA/web/scpro/bottle"
+  ]
+eddystone:
+  title: "eddystone"
+  paths: [
+    "/Library/WebServer/Documents/eddystone"
+  ]
+"term-resume":
+  title: "term-resume"
+  paths: [
+    "/Users/TAKAMASA/Documents/kumo/term/resume"
+  ]
+endeavour:
+  title: "endeavour"
+  paths: [
+    "/Users/TAKAMASA/web/consul/endeavour"
+  ]

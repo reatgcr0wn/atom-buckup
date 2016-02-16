@@ -1,0 +1,31 @@
+"*":
+  "atom-beautify":
+    _analyticsUserId: "e50977d3-3238-4d8e-9732-6306229bacf7"
+  core:
+    audioBeep: false
+    disabledPackages: [
+      "linter-eslint"
+    ]
+  editor:
+    backUpBeforeSaving: true
+    invisibles: {}
+    showIndentGuide: true
+    showInvisibles: true
+    softWrap: true
+  "exception-reporting":
+    userId: "e4d76158-22c5-e96e-6ad4-1f5071c482d5"
+  latex:
+    alwaysOpenResultInAtom: true
+  linter:
+    showErrorPanel: false
+  "linter-eslint": {}
+  "linter-rubocop":
+    command: "/Users/TAKAMASA/.rbenv/versions/2.2.3/bin/rubocop"
+  minimap: {}
+  "one-dark-ui": {}
+  term2: {}
+  welcome:
+    showOnStartup: false
+  zentabs:
+    maximumOpenedTabs: 8
+    neverCloseUnsaved: true
